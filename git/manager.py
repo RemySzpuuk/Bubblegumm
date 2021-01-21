@@ -23,7 +23,7 @@
 
 """
 # imports scanner class which will be used to find the project .gitignore file
-from scanner import Scanner
+from .scanner import Scanner
 
 class Manager:
     # Class variable empty will become true if their is nothing in the .gitignore file
@@ -52,12 +52,12 @@ class Manager:
             self.gitignore_path = self.loki.find(".gitignore")
 
         # reads .gitignore file and checks if file is empty
-        with open(self.gitignore_path, 'r') as self.contents:
-            if self.contents.read().replace(' ', '').replace('\n', '') == "":
+        with open(self.gitignore_path, 'r') as f:
+            if f.read().replace(' ', '').replace('\n', '') == "":
                 Manager.empty = True
             else:
                 # If file is not empty replace file object with the file's contents
-                self.contents: list = self.contents.readlines()
+                self.contents: list = f.readlines()
 
     # Adds file to list of file addresses (which is stored in memory)
     def add_file(self, file) -> None:
