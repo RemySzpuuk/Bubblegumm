@@ -1,11 +1,7 @@
-<img align="left" src="bubblegum.gif" style="width:140px;height:140px;">
-
-<br>
+<img align="left" src="bubblegum.gif" style="width:135px;height:135px;">
 
 # Bubblegumm
 Bubblegumm is a python library used to generate sitemap, reference pages, and page databases.
-
-<br>
 
 ### Sitemap generation
 
