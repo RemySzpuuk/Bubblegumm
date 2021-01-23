@@ -14,7 +14,7 @@ trying to read the site.
 
 **Warning this will remove any file named "sitemap.html" in the process**
 
-<br><br>
+<br>
 
 ### Reference pages
 
