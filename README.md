@@ -2,8 +2,8 @@
 
 <br>
 
-# Bubblegum
-Bubblegum is a python library used to generate sitemap, reference pages, and page databases.
+# Bubblegumm
+Bubblegumm is a python library used to generate sitemap, reference pages, and page databases.
 
 <br>
 
