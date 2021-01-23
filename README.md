@@ -14,6 +14,8 @@ trying to read the site.
 
 **Warning this will remove any file named "sitemap.html" in the process**
 
+<br><br>
+
 ### Reference pages
 
 A reference page is a list of html/css/js files, the file's directory, and a short description of what the file
