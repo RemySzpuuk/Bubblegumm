@@ -1,4 +1,4 @@
-<img align="left" src="bubblegum.gif" style="width:220px;height:220px;">
+<img align="left" src="bubblegum.gif" style="width:150px;height:150px;">
 
 <br>
 
