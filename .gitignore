@@ -1,3 +1,6 @@
 __pycache__/*
 /.idea/*
-git/__pycache__/*
+assets/*
+Lib/*
+pyvenv.cfg
+Scripts/*
