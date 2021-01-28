@@ -117,26 +117,3 @@ class ConfigAnalyser(INIT):
 
 
 
-
-
-
-
-
-
-
-
-
-
-class TokenParser(INIT):
-    def __init__(self):
-        super().__init__()
-
-class GenerateHTML:
-    def __init__(self):
-        pass
-
-
-
-
-
-

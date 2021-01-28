@@ -1,31 +1,21 @@
-from git.manager import Manager # Used to read .gitignore
-from git.scanner import Scanner # Used to scan for files/directories
+"""
+    Create by Remy Szpuk
 
-template = "<html><body>%</body></html>" # % sign is a marker for where content should go
-FILE_TYPES_TO_IGNORE = []
-FILES_TO_IGNORE = []
+    generator.py generates HTML and XML (depending upon the config file).
+    This will also generate a default config file, and an example config file in
+    the project's directory.
 
-# Read .gitignore
-# Analyse .gitignore
-odin = Manager()
-odin.add_file("/git/*")
-if not odin.empty:
-    for item in odin.contents:
-        if '*' in item:
-            FILE_TYPES_TO_IGNORE.append(item.replace('*', ''))
-        else:
-            FILES_TO_IGNORE.append(item)
+"""
+from reader import INIT
 
-thor = Scanner()
-for file in thor.find_type(".py"):
-    print(file)
+class Generator(INIT):
+    def __init__(self):
+        super(Generator, self).__init__()
 
-print(odin.contents)
+class GenerateHTML:
+    def __init__(self):
+        pass
 
-# Read directories and files
-# Remove any .gitignore files or file types
-
-# Generate a basic html sitemap
-            
-
-
+class GenerateXML:
+    def __init__(self):
+        pass
