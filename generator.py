@@ -6,16 +6,29 @@
     the project's directory.
 
 """
-from reader import INIT
+from __init__ import INIT
+import xml.etree.cElementTree as ET
+
+
 
 class Generator(INIT):
     def __init__(self):
         super(Generator, self).__init__()
 
-class GenerateHTML:
+class GenerateHTML(Generator):
     def __init__(self):
-        pass
+        super().__init__()
 
-class GenerateXML:
+        # We have the Value, now it's time to generate some nice HTML
+
+class GenerateXML(Generator):
     def __init__(self):
-        pass
+        super().__init__()
+        self.header = ET.Element("sitemap")
+        self.sub_header = {}
+        self.content = {}
+
+    # def GenerateXMLSitemap(self):
+
+
+

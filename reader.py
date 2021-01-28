@@ -8,46 +8,23 @@
 
 
 """
-
 import os
-import time
+from pathlib import Path
+from __init__ import INIT
 from distutils.util import strtobool
 
-class INIT:
-    def __init__(self, project_directory = os.getcwd(), config_file_directory = os.getcwd() ):
-        self.project_directory = project_directory
-        self.config_file_directory = config_file_directory + "/bubblegum.config"
-        self.log_file_directory = config_file_directory + "/bubblegum.log"
-        self.message: str  # none config method
-        self.show_console_log: bool = False
-        self.show_file_log: bool = False
-        self.use_git_ignore: bool = False
-        self.use_css_file: bool = False
-        self.css_file_path: bool = False
-        self.use_html: bool = True
+class DirectoryAnalyser(INIT):
+    def __init__(self):
+        super().__init__()
+        self.map = []
 
-        file = open(self.project_directory, 'w').close()
-        file = open(self.config_file_directory, 'w').close()
-        file = open(self.log_file_directory, 'w').close()
-
-    def log_to_console(self, function, message: str):
-        if not self.show_console_log:
-            return 0
-
-        def logger():
-            print(f"@{function.__name__}: {message} ~{time.time_ns()}")
-            return function()
-        return logger()
-
-    def log_to_file(self, function, message: str):
-        if not self.show_file_log:
-            return 0
-
-        def logger():
-            f = open(self.log_file_directory, 'a')
-            f.write(f"@{function.__name__}: {message} ~{time.time_ns()}")
-            return function()
-        return logger()
+    def scan_project_directory(self, file_type: str = ".html"):
+        i = 0
+        for root, folder, file in os.walk(self.project_directory):
+            for f in file:
+                if f.endswith(file_type):
+                    self.map[i] = {str(f), str(Path(f).resolve())}
+                    i += 1
 
 
 class ConfigAnalyser(INIT):
