@@ -1,8 +1,9 @@
 import os
 #import time
 
+
 class INIT:
-    def __init__(self, project_directory = os.getcwd(), config_file_directory = os.getcwd() ):
+    def __init__(self, project_directory = os.getcwd(), config_file_directory = os.getcwd()):
         self.project_directory = project_directory
         self.config_file_directory = config_file_directory + "/bubblegum.config"
         self.log_file_directory = config_file_directory + "/bubblegum.log"
@@ -14,9 +15,8 @@ class INIT:
         self.css_file_path: bool = False
         self.use_html: bool = True
 
-        file = open(self.project_directory, 'w').close()
-        file = open(self.config_file_directory, 'w').close()
-        file = open(self.log_file_directory, 'w').close()
+        file = open(self.config_file_directory, 'a').close()
+        file = open(self.log_file_directory, 'a').close()
 
 
     # THIS IS NOT HOW YOU WRITE DECORATORS WTF

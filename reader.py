@@ -13,14 +13,14 @@ from pathlib import Path
 from __init__ import INIT
 from distutils.util import strtobool
 
-class DirectoryAnalyser(INIT):
+
+class DirectoryAnalyser:
     def __init__(self):
-        super().__init__()
         self.map = []
 
     def scan_project_directory(self, file_type: str = ".html"):
         i = 0
-        for root, folder, file in os.walk(self.project_directory):
+        for root, folder, file in os.walk(os.getcwd()):
             for f in file:
                 if f.endswith(file_type):
                     self.map[i] = {str(f), str(Path(f).resolve())}
@@ -34,6 +34,7 @@ class ConfigAnalyser(INIT):
         self.almost_tokens = []
         self.tokens = {}
 
+    def read_config_to_contents(self):
         with open(self.config_file_directory, 'r') as config:
             self.contents = config.readlines()
 
@@ -43,40 +44,41 @@ class ConfigAnalyser(INIT):
             if line == '' or line == ' ':
                 self.contents.remove(line)
 
-        with self.contents as cfg:
-            for line in cfg:
-                if '#' in line:
-                    cfg.remove(line)
-                if line.upper() == "USE_GIT_IGNORE":
-                    self.almost_tokens.append(f"{line.upper()}")
-                if line.upper() == "PROJECT_DIRECTORY":
-                    self.almost_tokens.append(f"{line.upper()}")
-                if line.upper() == "LOG_FILE_DIRECTORY":
-                    self.almost_tokens.append(f"{line.upper()}")
-                if line.upper() == "CONFIG_FILE_DIRECTORY":
-                    self.almost_tokens.append(f"{line.upper()}")
-                if line.upper() == "CSS_FILE_PATH":
-                    self.almost_tokens.append(f"{line.upper()}")
-                if line.upper() == "USE_CSS_FILE":
-                    self.almost_tokens.append(f"{line.upper()}")
-                if line.upper() == "SHOW_CONSOLE_LOG":
-                    self.almost_tokens.append(f"{line.upper()}")
-                if line.upper() == "SHOW_FILE_LOG":
-                    self.almost_tokens.append(f"{line.upper()}")
-                if line.upper() == "USE_HTML":
-                    self.almost_tokens.append(f"{line.upper()}")
+    def read_contents_to_almost_tokens(self):
+        for line in self.contents:
+            if '#' in line:
+                self.contents.remove(line)
+            if line.upper() == "USE_GIT_IGNORE":
+                self.almost_tokens.append(f"{line.upper()}")
+            if line.upper() == "PROJECT_DIRECTORY":
+                self.almost_tokens.append(f"{line.upper()}")
+            if line.upper() == "LOG_FILE_DIRECTORY":
+                self.almost_tokens.append(f"{line.upper()}")
+            if line.upper() == "CONFIG_FILE_DIRECTORY":
+                self.almost_tokens.append(f"{line.upper()}")
+            if line.upper() == "CSS_FILE_PATH":
+                self.almost_tokens.append(f"{line.upper()}")
+            if line.upper() == "USE_CSS_FILE":
+                self.almost_tokens.append(f"{line.upper()}")
+            if line.upper() == "SHOW_CONSOLE_LOG":
+                self.almost_tokens.append(f"{line.upper()}")
+            if line.upper() == "SHOW_FILE_LOG":
+                self.almost_tokens.append(f"{line.upper()}")
+            if line.upper() == "USE_HTML":
+                self.almost_tokens.append(f"{line.upper()}")
 
-        with self.almost_tokens as alt:
-            for line in alt:
-                if ':' in line:
-                    line = line.split(':').replace(' ', '').replace('\n' '')
-                    self.tokens[line[0]] = line[1]
+    def read_almost_tokens_to_tokens(self):
+        for line in self.almost_tokens:
+            if ':' in line.replace(' ', '').replace('\n', ''):
+                line = line.split(':')
+                self.tokens[line[0]] = line[1]
 
         self.contents.clear()
         self.almost_tokens.clear()
         del self.contents
         del self.almost_tokens
 
+    def read_tokens_to_class_attributes(self):
         self.use_html = bool(strtobool(self.tokens["USE_HTML"].lower()))
         self.use_css_file = bool(strtobool(self.tokens["USE_CSS_FILE"].lower()))
         self.show_console_log = bool(strtobool(self.tokens["SHOW_CONSOLE_LOG"].lower()))
@@ -89,8 +91,3 @@ class ConfigAnalyser(INIT):
 
         self.tokens.clear()
         del self.tokens
-
-
-
-
-
