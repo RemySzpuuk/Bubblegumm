@@ -4,3 +4,10 @@ assets/*
 Lib/*
 pyvenv.cfg
 Scripts/*
+bubblegum.log
+bubblegum.config
+data.json
+build/*
+dist/*
+RemySzpuk.egg-info/*
+map.json

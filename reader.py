@@ -12,19 +12,32 @@ import os
 from pathlib import Path
 from __init__ import INIT
 from distutils.util import strtobool
+import json
 
 
 class DirectoryAnalyser:
     def __init__(self):
-        self.map = []
+        self.map = {}
 
     def scan_project_directory(self, file_type: str = ".html"):
         i = 0
         for root, folder, file in os.walk(os.getcwd()):
             for f in file:
                 if f.endswith(file_type):
-                    self.map[i] = {str(f), str(Path(f).resolve())}
+                    self.map[f"{i}"] = {"FILENAME": str(f), "PATH": str(Path(f).resolve())}
                     i += 1
+
+    def export_map(self):
+        with open("map.json", 'w') as outfile:
+            outfile.write(str(self.map))
+
+    @staticmethod
+    def refactor(char, new_char):
+        with open("map.json", 'r') as file:
+            string = file.read()
+        string = string.replace(char, new_char)
+        with open("map.json", 'w') as file:
+            file.write(string)
 
 
 class ConfigAnalyser(INIT):
